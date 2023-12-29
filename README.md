@@ -24,15 +24,15 @@ Once that's done simply run:
 `accelerate launch -m axolotl.cli.train axolotl_recipes/qlora.yml` from the root.
 
 ### Evaluation
-Open the evaluation.ipynb notebook and run the cells.
+Open the `evaluation.ipynb` notebook and run the cells.
 
 ## Design Decisions
 ### Base Model
 I have tried using the recommended T5Code+ model in many various ways.
 For the base models (most of them) I tried leveraging the unsupervised denoising task. E.g Input `(function modifiers) <extra_id_0>(params){code}` and hoped that
-the the output would be `<pad><extra_id_0>function name<extra_id_1>` as the model
+the output would be `<pad><extra_id_0>function name<extra_id_1>` as the model
 was trained in this way with denoising objective (decoder mask prediction). However it appears that the latter
-causual LM single modal objectve have removed the models ability to denoise. Secondly I tried to use completion mode, with following prompt:
+causual LM single modal objective removed the model's ability to denoise. Secondly I tried to use completion mode, with following prompt:
 ```
 (modifiers) x(prams){
     code
